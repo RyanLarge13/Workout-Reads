@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   post: {
     padding: 15,
     marginHorizontal: 15,
-    marginVertical: 25,
+    marginVertical: 50,
     backgroundColor: "#fff",
     borderRadius: 10,
     elevation: 10,

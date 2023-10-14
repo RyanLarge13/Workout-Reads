@@ -17,7 +17,7 @@ const Comments = ({ data }) => {
 const styles = StyleSheet.create({
   comment: {
     marginVertical: 15,
-    marginHorizontal: 5,
+    marginHorizontal: 25,
     padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",

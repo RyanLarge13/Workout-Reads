@@ -30,7 +30,7 @@ const Home = () => {
           keyExtractor={(post) => post._id}
         />
       )}
-      <StatusBar translucent={true} style="light" />
+      <StatusBar translucent={true} style="auto" />
     </View>
   );
 };
