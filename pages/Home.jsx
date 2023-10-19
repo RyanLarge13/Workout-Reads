@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, ScrollView, FlatList, Text, View } from "react-native";
-import { getPosts } from "../client.js";
+import { getPosts, getCategories } from "../client.js";
 import "react-native-url-polyfill/auto";
 import Post from "../components/Post.jsx";
 
 const Home = () => {
   const [posts, setPosts] = useState(false);
+  const [categories, setCatagories] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    getCategories()
+      .then((res) => setCatagories(res))
+      .catch((err) => console.log(err));
     getPosts(0)
       .then((res) => {
         setPosts(res);

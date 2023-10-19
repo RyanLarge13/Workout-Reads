@@ -92,3 +92,8 @@ export const singlePost = async (postId) => {
     }`);
   return result;
 };
+
+export const getCategories = () => {
+  const result = client.fetch(`*[_type == "category"] | order(title asc)`);
+  return result;
+};
