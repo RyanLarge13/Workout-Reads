@@ -6,10 +6,12 @@ import {
   Image,
   BackHandler,
   Pressable,
+  useWindowDimensions,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { singlePost } from "../client.js";
 import { useParams, useNavigate } from "react-router-native";
+import Spinner from "react-native-loading-spinner-overlay";
 import Icon from "react-native-vector-icons/FontAwesome";
 import RenderHtml from "react-native-render-html";
 import Comments from "../components/Comments";
@@ -21,6 +23,12 @@ const PostDetails = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const { width } = useWindowDimensions();
+
+  const customStyles = {
+    p: { padding: 0, margin: 0 },
+    li: { paddingBottom: 40, paddingLeft: 5},
+  };
 
   useEffect(() => {
     const handleNav = () => {
@@ -101,7 +109,11 @@ const PostDetails = () => {
             </View>
           </View>
           <View style={styles.body}>
-            <RenderHtml source={source} />
+            <RenderHtml
+              source={{ html: post.body }}
+              tagsStyles={customStyles}
+              contentWidth={width}
+            />
           </View>
           <Text style={styles.update}>
             Last updated {new Date(post.publishedAt).toLocaleDateString()}
@@ -120,7 +132,7 @@ const PostDetails = () => {
           </View>
         </>
       ) : (
-        <Text>Loading...</Text>
+        <Spinner />
       )}
     </ScrollView>
   );

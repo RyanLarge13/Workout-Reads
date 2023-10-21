@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#27334a"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/workoutBlog-adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#27334a"
       },
       "package": "com.ryanlarge.WorkoutReads"
     },
