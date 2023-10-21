@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -14,56 +14,24 @@ import "react-native-url-polyfill/auto";
 import Post from "../components/Post.jsx";
 import Categories from "../components/Categories.jsx";
 import Search from "../components/Search.jsx";
+import { usePostsContext } from "../context/PostsContext";
 
 const Home = () => {
-  const [posts, setPosts] = useState(false);
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [categories, setCatagories] = useState([]);
+  const {
+    posts,
+    setPosts,
+    categories,
+    setCategories,
+    filteredPosts,
+    setFilteredPosts,
+    selectedCategories,
+    setSelectedCategories,
+    setNewSearch,
+  } = usePostsContext();
+
   const [loading, setLoading] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [open, setOpen] = useState(false);
-  const [newSearch, setNewSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getCategories()
-      .then((res) => {
-        setCatagories(res);
-      })
-      .catch((err) => console.log(err));
-    getPosts(0)
-      .then((res) => {
-        setPosts(res);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (selectedCategories.length > 0) {
-      const newPosts = posts.filter((post) => {
-        const postCategoryIds = post.categories.map((cat) => cat._id);
-        if (postCategoryIds.some((id) => selectedCategories.includes(id))) {
-          return post;
-        }
-      });
-      return setFilteredPosts(newPosts);
-    }
-    setFilteredPosts([]);
-  }, [selectedCategories]);
-
-  useEffect(() => {
-    if (newSearch) {
-      const newPosts = posts.filter((post) => post.title.includes(newSearch));
-      setFilteredPosts(newPosts);
-    }
-    if (!newSearch) {
-    	setFilteredPosts([])
-    }
-  }, [newSearch]);
 
   return (
     <View style={styles.container}>
